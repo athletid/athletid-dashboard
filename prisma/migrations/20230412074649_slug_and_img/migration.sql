@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `Post` ADD COLUMN `img` VARCHAR(191) NULL,
+    ADD COLUMN `slug` VARCHAR(191) NOT NULL DEFAULT 'undefined';

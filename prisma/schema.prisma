@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  email     String    @unique
+  firstName String?
+  lastName  String?
+  password  String
+  role      String    @default("EDITOR")
+  img       String?
+  posts     Post[]
+  workouts  Workout[]
+}
+
+model Post {
+  id         String    @id @default(uuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  authorId   String
+  duration   Int       @default(0)
+  name       String
+  status     String    @default("DRAFT")
+  img        String?
+  slug       String    @default("undefined")
+  categoryId String
+  author     User      @relation(fields: [authorId], references: [id])
+  category   Category  @relation(fields: [categoryId], references: [id])
+  sections   Section[]
+
+  @@index([authorId, id])
+  @@index([categoryId, id])
+}
+
+model Workout {
+  id                String           @id @default(uuid())
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  authorId          String
+  name              String
+  status            String           @default("DRAFT")
+  difficulty        String           @default("medium")
+  img               String?
+  slug              String           @default("undefined")
+  workoutCategoryId String
+  qrCodeImg         String?
+  duration          Int
+  author            User             @relation(fields: [authorId], references: [id])
+  WorkoutCategory   WorkoutCategory  @relation(fields: [workoutCategoryId], references: [id])
+  sections          WorkoutSection[]
+
+  @@index([authorId, id])
+  @@index([workoutCategoryId, id])
+}
+
+model Section {
+  id        String  @id @default(uuid())
+  subTitle  String
+  paragraph String  @db.VarChar(10000)
+  postId    String
+  order     Int     @default(0)
+  img       String?
+  post      Post    @relation(fields: [postId], references: [id])
+
+  @@index([postId, id])
+}
+
+model WorkoutSection {
+  id        String  @id @default(uuid())
+  subTitle  String
+  paragraph String  @db.VarChar(10000)
+  workoutId String
+  order     Int     @default(0)
+  img       String?
+  workout   Workout @relation(fields: [workoutId], references: [id])
+
+  @@index([workoutId, id])
+}
+
+model Category {
+  name String @unique @default("undefined")
+  id   String @id @default(uuid()) @map("undefined_category_id")
+  Post Post[]
+}
+
+model WorkoutCategory {
+  name    String    @unique @default("undefined")
+  id      String    @id @default(uuid()) @map("undefined_workout_category_id")
+  workout Workout[]
+}
+
+model SearchQuery {
+  id    String @id @default(uuid())
+  query String
+}

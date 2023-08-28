@@ -1,0 +1,74 @@
+{
+  "name": "athletd.next.dash",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma migrate deploy && prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.14",
+    "@heroicons/react": "^2.0.18",
+    "@next/font": "13.2.4",
+    "@nextui-org/react": "^1.0.0-beta.13",
+    "@prisma/client": "^4.16.0-dev.5",
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.33",
+    "@types/react-dom": "18.0.11",
+    "@types/react-modal": "^3.13.1",
+    "axios": "^1.3.5",
+    "bcrypt": "^5.1.0",
+    "class-variance-authority": "^0.5.1",
+    "cloudinary": "^1.36.2",
+    "cloudinary-react": "^1.8.1",
+    "clsx": "^1.2.1",
+    "cookie": "^0.5.0",
+    "cookies-next": "^2.1.1",
+    "eslint": "8.37.0",
+    "eslint-config-next": "13.2.4",
+    "flowbite": "^1.6.5",
+    "heroicons": "^2.0.18",
+    "jose": "^4.13.1",
+    "js-cookie": "^3.0.5",
+    "next": "13.2.4",
+    "next-superjson-plugin": "^0.5.6",
+    "nextjs-cors": "^2.1.2",
+    "nookies": "^2.5.2",
+    "prettier": "^2.8.7",
+    "react": "18.2.0",
+    "react-div-100vh": "^0.7.0",
+    "react-dom": "18.2.0",
+    "react-feather": "^2.0.10",
+    "react-icons": "^4.8.0",
+    "react-modal": "^3.16.1",
+    "slugify": "^1.6.6",
+    "styled-components": "^5.3.9",
+    "superjson": "^1.12.2",
+    "swr": "^2.1.5",
+    "typescript": "5.0.3"
+  },
+  "prisma": {
+    "seed": "ts-node -P tsconfig-seed.json -r tsconfig-paths/register --transpileOnly prisma/seed.ts"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cookie": "^0.5.1",
+    "@types/cors": "^2.8.13",
+    "@types/js-cookie": "^3.0.3",
+    "@types/styled-components": "^5.1.26",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "prisma": "^4.16.0-dev.5",
+    "tailwindcss": "^3.3.1"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
+  },
+  "resolutions": {
+    "@types/react": "~17.0.21"
+  }
+}
